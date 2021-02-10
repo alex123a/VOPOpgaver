@@ -43,6 +43,8 @@ public class PrimaryController implements javafx.fxml.Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         file = new FileChooser();
         file.setInitialDirectory(new File("."));
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
+        file.getExtensionFilters().add(extFilter);
     }
 
     @FXML
@@ -79,7 +81,9 @@ public class PrimaryController implements javafx.fxml.Initializable {
         } catch (FileNotFoundException | NullPointerException e) {
             System.out.println("Wrong path");
         } finally {
-            pw.close();
+            if (pw != null) {
+                pw.close();
+            }
         }
     }
 }
