@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vop.PrimaryController">
 
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vop.PrimaryController">
+   <children>
+      <Label layoutX="96.0" layoutY="41.0" prefHeight="17.0" prefWidth="32.0" text="Søg:" />
+      <Label layoutX="321.0" layoutY="41.0" prefHeight="17.0" prefWidth="41.0" text="Erstat:" />
+      <TextField fx:id="searchField" layoutX="96.0" layoutY="58.0" />
+      <TextField fx:id="replaceField" layoutX="321.0" layoutY="58.0" />
+      <TextArea fx:id="textArea" layoutX="96.0" layoutY="109.0" prefHeight="182.0" prefWidth="374.0" />
+      <Button fx:id="replaceBot" layoutX="249.0" layoutY="58.0" mnemonicParsing="false" onAction="#replaceAllFunc" text="Erstat alle" />
+      <Button fx:id="openFile" layoutX="96.0" layoutY="313.0" mnemonicParsing="false" onAction="#openFileMethod" text="Åben fil" />
+      <Button fx:id="saveFile" layoutX="403.0" layoutY="313.0" mnemonicParsing="false" onAction="#saveFileMethod" text="Gem som" />
+   </children>
 </AnchorPane>

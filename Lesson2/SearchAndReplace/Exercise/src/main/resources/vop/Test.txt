@@ -1,0 +1,18 @@
+﻿/**
+ * BørgeMaxLugter Example for use during the VOP exam F15
+ * @author erso   Created on 15-05-2015, 10:19:06
+ */
+public class BørgeMaxLugter {
+
+    public BørgeMaxLugter() {
+        System.out.println("BørgeMaxLugter");
+    }
+
+
+    public static void main(String[] args) {
+        BørgeMaxLugter helloMaxLugter = new BørgeMaxLugter();
+    }
+}
+
+
+
