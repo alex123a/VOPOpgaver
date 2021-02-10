@@ -9,8 +9,7 @@ public class DanishIsland {
     private int addresses;
     private int addrPerKm2;
 
-    public DanishIsland(String name, double circumference, double area,
-            int addresses, int addrPerKm2) {
+    public DanishIsland(String name, double circumference, double area, int addresses, int addrPerKm2) {
         super();
         this.name = name;
         this.circumference = circumference;

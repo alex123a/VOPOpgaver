@@ -1,6 +1,7 @@
 package vop;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class DanishIslandFileReader {
     private List<DanishIsland> islandList;
 
     public DanishIslandFileReader(String fName) {
-        inFile = new File(fName);
+        this.inFile = new File(fName);
     }
 
     private void readFile() {
@@ -31,12 +32,24 @@ public class DanishIslandFileReader {
         int addr;
         int adkm;
 
-        // OPGAVEN:    
-        // Laes filen en linje ad gangen. Split linjen paa mellemrums tegnet.
-        // Konverter de enkelte vaerdier til typerne der skal bruges i DanishIsland.
-        // Opret et objekt for hver linje og tilfoej det til listen.
-        // Vaer omhyggelig med at fange exceptions og faa lukke Scanner og fil
-            
+        try {
+            scan = new Scanner(inFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (scan.hasNextLine()) {
+            line = scan.nextLine();
+            tokens = line.split(" ");
+            name = tokens[0];
+            circ = Double.parseDouble(tokens[1].replace(",", "."));
+            area = Double.parseDouble(tokens[2].replace(",", "."));
+            addr = Integer.parseInt(tokens[3]);
+            adkm = Integer.parseInt(tokens[4]);
+            islandList.add(new DanishIsland(name, circ, area, addr, adkm));
+        }
+
+        scan.close();
     }
     
     public List<?> getList(){
@@ -49,7 +62,7 @@ public class DanishIslandFileReader {
      */
     public static void main(String[] args) throws IOException {
         System.out.println(DanishIslandFileReader.class.getClassLoader().getResource("Islands_komma.txt"));
-        DanishIslandFileReader fr = new DanishIslandFileReader("Islands_punktum.txt");
+        DanishIslandFileReader fr = new DanishIslandFileReader("C:/Users/alexv/Documents/GitHub/exercises/Lesson2Preparation/DanishIslands/Exercise/target/classes/Islands_komma.txt");
         //DanishIslandFileReader fr = new DanishIslandFileReader("Islands_komma.txt");
         fr.readFile();
         

@@ -21,18 +21,24 @@ public class ShapeFacade {
         return instance;
     }
 
-    private ShapeFacade() {
-    }
-    //---------------------------
-
     // enum som kendes af GUI'en
     public enum SHAPES {
-        CIRCLE, ELLIPSE, RECTANGLE, SQUERE
+        CIRCLE, ELLIPSE, RECTANGLE, SQUARE
     };
 
     // Facadens public metoder
-    public String getShapeInfo(SHAPES shape, double... parametre) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String getShapeInfo(SHAPES shape, double... a) {
+        switch (shape) {
+            case CIRCLE:
+                return "" + (new Circle(a[0]));
+            case SQUARE:
+                return "" + (new Square(a[0]));
+            case ELLIPSE:
+                return "" + (new Ellipse(a[0], a[1]));
+            case RECTANGLE:
+                return "" + (new Rectangle(a[0], a[1]));
+            default:
+                return "Shape is unknown";
+        }
     }
-
 }
