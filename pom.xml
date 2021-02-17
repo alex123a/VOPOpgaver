@@ -20,5 +20,7 @@
         <module>Lesson2/SearchAndReplace/Exercise</module>
         <module>Lesson2/SearchAndReplace/Solution</module>
         <module>Lesson3Preparation/Compare/Exercise</module>
+        <module>Lesson3Preparation/Compare/Solution</module>
+        <module>Lesson3/Mountains/Exercise</module>
     </modules>
 </project>
