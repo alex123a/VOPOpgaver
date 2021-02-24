@@ -2,69 +2,101 @@ package vop.TextAnalyzer;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.Set;
-import java.util.Map;
+import java.util.*;
 
 public class TextAnalyzer {
 
 	private File file;
 
 	public TextAnalyzer(String fileName) throws URISyntaxException {
-		file = new File(getClass().getClassLoader().getResource(fileName).toURI().toString());
+		//file = new File(getClass().getClassLoader().getResource(fileName).toURI().toString());
+		file = new File(fileName);
 	}
 
-	// Opgave 2A     
-	// Parameteren sorted afgør om der skal benyttes et sorteret Set
-	//
+
 	public Set<String> findUniqueWords(boolean sorted) {
-		Set<String> set = null;
+		Set<String> set;
 		if (sorted) {
-			//set =  //initialiser et sorteret Set
+			set = new TreeSet<>();
 		} else {
-			//set = // initialiser et usorteret Set
+			set = new HashSet<>();
 		}
 
-		// gennemlæs filen et ord ad gangen
-		// kald clean() metoden på hvert ord
-		// og tilføj ordet til settet.
+		Scanner scanner;
+		try {
+			scanner = new Scanner(file);
+			while (scanner.hasNext()) {
+				set.add(clean(scanner.next()));
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("The file is not found! Check path");
+		}
 
 		return set;
 	}
 
-	// Opgave 2B:   Nearly as Listing 21.9 from Liang
-	//
 	public Map<String, Integer> countWords(boolean sorted) {
-		Map<String, Integer> map = null;
+		Map<String, Integer> map;
 		if (sorted) {
-			//map = // sorteret mappe
+			map = new TreeMap<>();
 		} else {
-			//map = // usorteret mappe
+			map = new HashMap<>();
 		}
-		// gennemlæs filen et ord ad gangen
-		// kald clean() metoden på hvert ord
-		// benyt mappen til at tælle forekomsten af hvert ord
+
+		Scanner scanner;
+		try {
+			scanner = new Scanner(file);
+			while (scanner.hasNext()) {
+				String nextWord = this.clean(scanner.next());
+				if (!map.containsKey(nextWord)) {
+					map.put(nextWord, 1);
+				} else {
+					map.put(nextWord, map.get(nextWord) + 1);
+				}
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("The file is not found! Check path");
+		}
 
 		return map;
 	}
 
-	// Opgave 2C:     Udvidelse af P15.1
-	//
-	public Map<Integer, Set<String>> lengtOfWords(boolean sorted) {
-		Map<Integer, Set<String>> mapOfSets = null;
-		if (sorted) {
-			//mapOfSets = // sorteret
-		} else {
-			//mapOfSets = // usorteret
-		}
-		// gennemlæs filen et ord ad gangen
-		// kald clean() metoden på hvert ord
-		// Indsæt hvert ord i det Set<String> som er værdi til ordlængden som key
-		// Hint: nyt Set<String> skal oprettes hver gang en længde opdages første gang.
 
+	public Map<Integer, Set<String>> lengtOfWords(boolean sorted) {
+		Map<Integer, Set<String>> mapOfSets;
+		if (sorted) {
+			mapOfSets = new TreeMap<>();
+		} else {
+			mapOfSets = new HashMap<>();
+		}
+
+		Scanner scanner;
+		try {
+			scanner = new Scanner(file);
+			while (scanner.hasNext()) {
+				String nextWord = clean(scanner.next());
+				if (!mapOfSets.containsKey(nextWord.length())) {
+					mapOfSets.put(nextWord.length(), new HashSet<>(Arrays.asList(nextWord)));
+				} else {
+					Set<String> newSet = new TreeSet<>();
+					newSet.addAll(mapOfSets.get(nextWord.length()));
+					newSet.add(nextWord);
+					mapOfSets.put(nextWord.length(), newSet);
+				}
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("The file is not found! Check path");
+		}
 
 		return mapOfSets;
-
 	}
 
 	// Denne metode forsøger at fjerne alt 'snavs' fra en String,
@@ -85,24 +117,24 @@ public class TextAnalyzer {
 	 */
 	public static void main(String[] args) throws URISyntaxException {
 
-		TextAnalyzer ta = new TextAnalyzer("alice30.txt");
+		//TextAnalyzer ta = new TextAnalyzer("alice30.txt");
+		TextAnalyzer ta = new TextAnalyzer("C:/Users/alexv/Documents/GitHub/exercises/Lesson3Preparation/Compare/Exercise/src/main/java/vop/TextAnalyzer/alice30.txt");
 		ta.countWords(false);
 		// Opgave 2A. Find alle unikke ord i filen
-//		Set<String> set = ta.findUniqueWords(true);
-//		System.out.println(set);
-//		System.out.println("Number of unique words: " + set.size());
+		Set<String> set = ta.findUniqueWords(true);
+		System.out.println(set);
+		System.out.println("Number of unique words: " + set.size());
 
 		System.out.println("\n------------------------------------------------------------------\n");
 
-		// Opgave 2B. Tæl forekomster af ord
-//		Map<String, Integer> map = ta.countWords(true);
-//		System.out.println(map);
-//
+
+		Map<String, Integer> map = ta.countWords(true);
+		System.out.println(map);
+
 		System.out.println("\n------------------------------------------------------------------\n");
 
-		// Opgave 2C. Benyt en mappe til at gruppere ord efter længde
-//		Map<Integer, Set<String>> map2 = ta.lengtOfWords(true);
-//		System.out.println(map2);
+		Map<Integer, Set<String>> map2 = ta.lengtOfWords(true);
+		System.out.println(map2);
 
 	}
 

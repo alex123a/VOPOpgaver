@@ -35,7 +35,10 @@ public class Person implements Comparable<Person>{
     // Hvis det stadig er ens sorteres på fødselsdag.
     @Override
     public int compareTo(Person o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int comparefName = this.getfName().compareTo(o.getfName());
+        int comparelName = this.getlName().compareTo(o.getlName());
+        int comparebday = this.getBirthDay().compareTo(o.getBirthDay());
+        return comparelName != 0 ? comparelName : comparefName != 0 ? comparefName : comparebday;
     }
 
     public static void main(String[] args) {
@@ -50,23 +53,38 @@ public class Person implements Comparable<Person>{
         System.out.println(list);
         
         Collections.sort(list);
-        System.out.println("\nsorted:\n" +list);
+        System.out.println("\nsorted with comparable:\n" + list);
         
         Comparator<Person> comp = new Comparator<Person>(){
             // Opgave 1B:
             // Comparatoren skal sorterer på heigth
             @Override
             public int compare(Person o1, Person o2) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                return o1.getHeigth() > o2.getHeigth() ? 1 : o1.getHeigth() == o2.getHeigth() ? 0 : -1;
             }
         
         };
-        
-        // Fjern udkommenteringen, når Comparatoren er programmeret:
-//        Collections.sort(list,comp);
-//        System.out.println("\nsorted:\n" +list);
+
+        Collections.sort(list,comp);
+        System.out.println("\nsorted with comparator:\n" + list);
         
     }
 
-    
+    public String getfName() {
+        return fName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public GregorianCalendar getBirthDay() {
+        return birthDay;
+    }
+
+    public double getHeigth() {
+        return heigth;
+    }
+
+
 }
