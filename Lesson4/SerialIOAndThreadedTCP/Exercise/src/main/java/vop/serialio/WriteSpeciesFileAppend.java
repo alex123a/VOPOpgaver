@@ -13,7 +13,7 @@ public class WriteSpeciesFileAppend {
         String fileName = getFileName("Enter output file name.");
 
         try (ObjectOutputStream outputStream = new ObjectOutputStream(
-                new FileOutputStream(fileName, true))) {
+                new FileOutputStream(fileName))) {
             Species califCondor
                     = new Species("Calif. Condor", 27, 0.02);
             outputStream.writeObject(califCondor);
