@@ -22,5 +22,7 @@
         <module>Lesson3Preparation/Compare/Exercise</module>
         <module>Lesson3Preparation/Compare/Solution</module>
         <module>Lesson3/Mountains/Exercise</module>
+        <module>Lesson3/Mountains/Solution</module>
+        <module>Lesson4/SerialIOAndThreadedTCP/Exercise</module>
     </modules>
 </project>
