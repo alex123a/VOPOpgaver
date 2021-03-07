@@ -1,21 +1,40 @@
 package vop.serialio;
 
-
+/**
+ * File name: WriteSpeciesFile.java
+ *
+ * A class to build binary files of Species records (type Species). It is a
+ * utility file for FindSpeciesRecords.java.
+ *
+ * Note: after all records are written to the file it displays the values
+ * entered so they can be verified.
+ *
+ * Based on ClassObjectIODemo.java, Listing 10.10
+ *
+ * Uses Species.java, Listing 10.9
+ *
+ * Written by: Lew Rakocy email address: LRakocy@devrycols.edu Date: 04/05/2003
+ * Updated for fourth edition by Brian Durney, January 2005.
+ */
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class WriteSpeciesFileAppend {
 
     public static void main(String[] args) {
         String fileName = getFileName("Enter output file name.");
-
         File file = new File(fileName);
-
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(
-                new FileOutputStream(fileName))) {
+        try (ObjectOutputStream outputStream = 
+                file.exists() ? 
+                new ObjectOutputStream(new FileOutputStream(file, true)) {
+                    @Override
+                    protected void writeStreamHeader() throws IOException {
+                        super.reset();
+                    }
+                }
+                : new ObjectOutputStream(new FileOutputStream(file, true));)
+        {
             Species califCondor
                     = new Species("Calif. Condor", 27, 0.02);
             outputStream.writeObject(califCondor);
@@ -34,9 +53,8 @@ public class WriteSpeciesFileAppend {
                 + fileName + ".");
         System.out.println(
                 "Now let's reopen the file and echo the records.");
-
-        Species readOne;
         int records = 0;
+        Species readOne;
         try (ObjectInputStream inputStream = new ObjectInputStream(
                 new FileInputStream(fileName))) {
 
@@ -47,7 +65,7 @@ public class WriteSpeciesFileAppend {
                 records++;
             }
         } catch (EOFException eof) {
-            System.out.println("Reading Done! " + records);
+            System.out.println("Reading Done! "  + records);
 
         } catch (IOException e) {
             System.err.println("Error opening input file "
