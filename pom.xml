@@ -26,5 +26,7 @@
         <module>Lesson4/SerialIOAndThreadedTCP/Exercise</module>
         <module>Lesson4/SerialIOAndThreadedTCP/Solution</module>
         <module>Lesson6Preparation/Novels/Exercise</module>
+        <module>Lesson6Preparation/Novels/Solution</module>
+        <module>Lesson6/OneArmedBandit/Exercise</module>
     </modules>
 </project>
