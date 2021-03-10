@@ -5,7 +5,7 @@ public class Main {
         String[] fileNames = {"alice30.txt", "boscombe.txt", "snow-white.txt"};
         for (String fileName : fileNames) {
             Runnable wcr = new WordCountRunnable(fileName);
-            // Start a Thread for the Runnable here:
+            (new Thread(wcr)).start();
         }
     }
 }
