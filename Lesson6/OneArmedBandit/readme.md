@@ -20,7 +20,7 @@ Resource filer: indeholder 10 billeder af frugt. Billederne er 90*90 pixel.
 
 ## Task 1
 Definer brugerfladen i SceneBuilder’en.
-Indlæs de udleverede billeder i et fælles `javafx.scene.image.Image[]`, som udfyldes i `initialize()`-metoden. Hvert billede kan indsættes i arrayet med `new Image(new File(getClass().getResources(filnavn)).toURI().toString());`
+Indlæs de udleverede billeder i et fælles `javafx.scene.image.Image[]`, som udfyldes i `initialize()`-metoden. Hvert billede kan indsættes i arrayet med `new Image(getClass().getResource(filename).toURI().toString());`
 
 ## Task 2
 Benyt en tæller-variabel til at holde øje med hvor mange sekvenser, der kører. Tilgang til variablen skal

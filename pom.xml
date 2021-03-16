@@ -28,5 +28,6 @@
         <module>Lesson6Preparation/Novels/Exercise</module>
         <module>Lesson6Preparation/Novels/Solution</module>
         <module>Lesson6/OneArmedBandit/Exercise</module>
+        <module>Lesson6/OneArmedBandit/Solution</module>
     </modules>
 </project>
