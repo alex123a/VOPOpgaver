@@ -6,9 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,26 +40,40 @@ public class PrimaryController implements Initializable, CallBackInterface {
 
     @FXML
     private void buttonAction(ActionEvent event) {
-        if (event.getSource() == startButton) {
-            // Initialize the facade and start it.
-            // handle access to the buttons
-        } else {
-            // Stop the facade
+        try {
+            if (event.getSource() == startButton) {
+                facade = new FacadeWithCallback(this);
+                facade.setDaemon(true);
+                facade.start();
+                stopButton.setDisable(false);
+                startButton.setDisable(true);
+            } else {
+                // Stop the facade
+                facade.interrupt();
+                stopButton.setDisable(true);
+                startButton.setDisable(false);
+            }
+        } catch (URISyntaxException e) {
+
         }
     }
 
     @Override
     public void updateMessage(String message) {
-        // This is the implementation of the CallBack. Remember it is called fro a Thread!
-        // append the message to the textArea
-
+        if (facade != null && facade.isAlive()) {
+            textArea.setText(message);
+        }
     }
 
     @Override
     public void updateImages(File i1, File i2) {
-        // change the pictures on the imageViews
-
+        try {
+            if (facade != null && facade.isAlive()) {
+                die1view.setImage(new Image(getClass().getResource(i1.getName()).toURI().toString()));
+                die2view.setImage(new Image(getClass().getResource(i2.getName()).toURI().toString()));
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
-
-
 }
