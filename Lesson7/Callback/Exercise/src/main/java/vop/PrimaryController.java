@@ -48,7 +48,6 @@ public class PrimaryController implements Initializable, CallBackInterface {
                 stopButton.setDisable(false);
                 startButton.setDisable(true);
             } else {
-                // Stop the facade
                 facade.interrupt();
                 stopButton.setDisable(true);
                 startButton.setDisable(false);
@@ -61,7 +60,7 @@ public class PrimaryController implements Initializable, CallBackInterface {
     @Override
     public void updateMessage(String message) {
         if (facade != null && facade.isAlive()) {
-            textArea.setText(message);
+            textArea.appendText(message);
         }
     }
 
@@ -75,5 +74,11 @@ public class PrimaryController implements Initializable, CallBackInterface {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stopped() {
+        stopButton.setDisable(true);
+        startButton.setDisable(false);
     }
 }

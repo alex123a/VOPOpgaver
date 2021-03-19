@@ -66,6 +66,7 @@ public class FacadeWithCallback extends Thread {
                     wait(100);
                 }
             }
+            callBack.stopped();
         } catch (InterruptedException ex) {
             callBack.updateMessage("I GOT INTERRUPTED!!!");
         }
@@ -83,6 +84,11 @@ public class FacadeWithCallback extends Thread {
             @Override
             public void updateImages(File i1, File i2) {
                 System.out.println("Pics: " + i1.getName() + " " + i2.getName());
+            }
+
+            @Override
+            public void stopped() {
+
             }
         };
 
