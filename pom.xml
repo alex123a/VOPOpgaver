@@ -30,6 +30,10 @@
         <module>Lesson6/OneArmedBandit/Exercise</module>
         <module>Lesson6/OneArmedBandit/Solution</module>
         <module>Lesson7/Callback/Exercise</module>
+        <module>Lesson7/Callback/Solution</module>
         <module>Lesson7/CircularBuffer/Exercise</module>
+        <module>Lesson7/CircularBuffer/Solution</module>
+        <module>Lesson8/CallbackWithTest/Exercise</module>
+        <module>Lesson8/BinarySearch/Exercise</module>
     </modules>
 </project>
