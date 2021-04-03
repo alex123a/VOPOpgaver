@@ -10,6 +10,12 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
+
+
+import java.io.File;
+import java.net.URISyntaxException;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -39,12 +45,32 @@ public class FacadeWithCallbackTest {
 //        TODO
 //        Instantiate your CallBackInterface
 //        Instantiate and start your Facade Thread
+        soutCallBack = new CallBackInterface() {
+            @Override
+            public void updateMessage(String message) {
+
+            }
+
+            @Override
+            public void updateImages(File i1, File i2) {
+
+            }
+        };
+        try {
+            facade = new FacadeWithCallback(soutCallBack);
+            facade.setDaemon(true);
+            facade.start();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @After
     public void tearDown() {
 //        TODO
 //        Interrupt your facade Thread
+        facade.interrupt();
     }
 
     /**
@@ -56,6 +82,12 @@ public class FacadeWithCallbackTest {
 //        TODO
 //        Test the run() method
 //        Assert if the dice.getDie1() and dice.getDie2() are equal to integer 6
+        try {
+            facade.join();
+            assertEquals(facade.getDice().getDie1(), 6);
+            assertEquals(facade.getDice().getDie2(), 6);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
-
 }
