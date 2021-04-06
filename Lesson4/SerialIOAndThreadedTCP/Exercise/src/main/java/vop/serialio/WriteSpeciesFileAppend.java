@@ -11,25 +11,40 @@ public class WriteSpeciesFileAppend {
 
     public static void main(String[] args) {
         String fileName = getFileName("Enter output file name.");
-
         File file = new File(fileName);
+        if (!file.exists()) {
+            try (ObjectOutputStream outputStream = new ObjectOutputStream(
+                    new FileOutputStream(fileName, true))) {
+                Species califCondor
+                        = new Species("Calif. Condor", 27, 0.02);
+                outputStream.writeObject(califCondor);
 
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(
-                new FileOutputStream(fileName))) {
-            Species califCondor
-                    = new Species("Calif. Condor", 27, 0.02);
-            outputStream.writeObject(califCondor);
+                Species blackRhino
+                        = new Species("Black Rhino", 100, 1.0);
+                outputStream.writeObject(blackRhino);
 
-            Species blackRhino
-                    = new Species("Black Rhino", 100, 1.0);
-            outputStream.writeObject(blackRhino);
-
-        } catch (IOException e) {
-            System.err.println("Error opening output file "
-                    + fileName + ": " + e.getMessage());
-            System.exit(0);
+            } catch (IOException e) {
+                System.err.println("Error opening output file "
+                        + fileName + ": " + e.getMessage());
+                System.exit(0);
+            }
+        } else {
+            try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file, true)) {
+                @Override
+                protected void writeStreamHeader() throws IOException {
+                    reset();
+                }
+            }) {
+                Species califCondor = new Species("Calif. Condor", 27, 0.02);
+                outputStream.writeObject(califCondor);
+                Species blackRhino = new Species("Black Rhino", 100, 1.0);
+                outputStream.writeObject(blackRhino);
+            } catch (FileNotFoundException ex) {
+                System.out.println("File not working");
+            } catch (IOException ex) {
+                System.out.println("Some other error");
+            }
         }
-
         System.out.println("Records sent to file "
                 + fileName + ".");
         System.out.println(
