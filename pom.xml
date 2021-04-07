@@ -37,5 +37,8 @@
         <module>Lesson8/CallbackWithTest/Solution</module>
         <module>Lesson8/BinarySearch/Exercise</module>
         <module>Lesson8/BinarySearch/Solution</module>
+        <module>Lesson9/ArrayManipulation/Exercise</module>
+        <module>Lesson9/BinarySearchExample</module>
+        <module>Lesson9/FilesInDirs/Exercise</module>
     </modules>
 </project>
