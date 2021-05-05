@@ -21,7 +21,7 @@ parentheses onto a `Stack<Character>`:
 
 ### Task 2
 
-- Use a `List<Character>` instead of a `Stack`, implement your own version of `push()` and `pop()` - remember that values should be inserted and retrieved in a FIFO (first in, first out) manner. 
+- Use a `List<Character>` instead of a `Stack`, implement your own version of `push()` and `pop()` - remember that values should be inserted and retrieved in a LIFO (Last in, first out) manner. 
     - You are free to create a new class for this purpose, if you don't want to overwrite the existing one.
 
 ![stack](assets/stack.png)

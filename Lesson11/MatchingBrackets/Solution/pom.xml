@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dk.sdu</groupId>
     <version>1.0</version>
-    <artifactId>Lesson11Exercise-MatchingBrackets</artifactId>
+    <artifactId>Lesson9Solution-MatchingBrackets</artifactId>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>15</maven.compiler.source>

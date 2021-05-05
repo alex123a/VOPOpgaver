@@ -43,5 +43,6 @@
         <module>Lesson9/FilesInDirs/Exercise</module>
         <module>Lesson9/FilesInDirs/Solution</module>
         <module>Lesson11/MatchingBrackets/Exercise</module>
+        <module>Lesson11/MatchingBrackets/Solution</module>
     </modules>
 </project>
